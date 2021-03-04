@@ -1,7 +1,7 @@
-import counter from './counter';
+import {posts} from './posts';
 
 const actions = {
-    counter
+    posts,
 }
 
 export default actions;

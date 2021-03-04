@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import counter from './counter';
+import posts from './posts';
 
 // combine multiple reducers with combineReducers middleware
 const rootReducer = combineReducers({
     // add reducers here
-    counter
+    posts
 });
 
 // export a single root reducer

@@ -4,34 +4,30 @@ import actions from './actions';
 
 function App() {
     // useSelector is the equivalent to mapStateToProps
-    const counter = useSelector(state => state.counter);
+    const posts = useSelector(state => state.posts);
 
     // useDispatch is the equivalent to mapDispatchToProps
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch the counter reset action
-        dispatch(actions.counter.reset());
+        // dispatch the fetch posts action
+        dispatch(actions.posts.fetchPosts());
     }, [dispatch])
+
+    const isFetchingPosts = posts.isFetchingPosts;
 
     return (
         <div className="App">
-            <h1>Current value of counter is {counter}</h1>
-
-            <div>
-                <button type="button"
-                        onClick={() => dispatch(actions.counter.increment())}>
-                    Increment
-                </button>
-                <button type="button"
-                        onClick={() => dispatch(actions.counter.decrement())}>
-                    Decrement
-                </button>
-                <button type="button"
-                        onClick={() => dispatch(actions.counter.reset())}>
-                    Reset
-                </button>
-            </div>
+            {isFetchingPosts ?
+                <div>
+                    <p>Loading posts</p>
+                </div>
+                : posts.data.map(post => (
+                    <div key={post.id}>
+                        <h1>{post.title}</h1>
+                    </div>
+                ))
+            }
         </div>
     );
 }
